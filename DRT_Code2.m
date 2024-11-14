@@ -2,7 +2,7 @@ clear; clc; close all;
 
 %% Load the data
 data_dir = 'G:\공유 드라이브\Battery Software Lab\Projects\DRT\SD';
-data_file = fullfile(data_dir, 'AS1_1per.mat');
+data_file = fullfile(data_dir, 'AS1_2per.mat');
 [~, name, ~] = fileparts(data_file); % 파일명에서 이름 부분 추출 ('AS2_1per')
 loaded_struct = load(data_file);
 data = loaded_struct.(name);
@@ -114,5 +114,6 @@ for i = 1:length(combinations)
 end
 
 % 동일한 이름으로 새 파일 저장 (확장자 변경)
-output_file = fullfile(data_dir, [name '_new.mat']);
+output_dir = 'G:\공유 드라이브\Battery Software Lab\Projects\DRT\SD_new';
+output_file = fullfile(output_dir, [name '_new.mat']);
 eval(['save(output_file, ''' new_data_name ''');']); % 자동으로 이름 매칭해서 저장
