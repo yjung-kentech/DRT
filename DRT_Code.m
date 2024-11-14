@@ -23,6 +23,10 @@ combinations(num_combinations) = struct('dt', [], 'duration', [], 'n', []);
 
 idx = 1;
 
+% Define type list
+type_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+num_types = length(type_list);
+
 % 조합 1
 dt = 0.1;
 duration = 1000;
@@ -32,6 +36,7 @@ for i = 1:length(n_list)
     combinations(idx).dt = dt;
     combinations(idx).duration = duration;
     combinations(idx).n = n;
+    combinations(idx).type = type_list(mod(idx-1, num_types) + 1);
     idx = idx + 1;
 end
 
@@ -44,6 +49,7 @@ for i = 1:length(dt_list)
     combinations(idx).dt = dt;
     combinations(idx).duration = duration;
     combinations(idx).n = n;
+    combinations(idx).type = type_list(mod(idx-1, num_types) + 1);
     idx = idx + 1;
 end
 
@@ -56,20 +62,23 @@ for i = 1:length(duration_list)
     combinations(idx).dt = dt;
     combinations(idx).duration = duration;
     combinations(idx).n = n;
+    combinations(idx).type = type_list(mod(idx-1, num_types) + 1);
     idx = idx + 1;
 end
 
 % 결과를 저장할 struct 배열 초기화
 total_results = num_combinations * 10;
-AS2_1per_new(total_results) = struct('dt', [], 'dur', [], 'n', [], 'SN', [], 'V', [], 'I', [], 't', []);
+AS2_1per_new(total_results) = struct('dt', [], 'dur', [], 'n', [], 'SN', [], 'V', [], 'I', [], 't', [], 'type', []);
 
 index = 1;
 
 % 모든 조합에 대해 데이터 처리
 for i = 1:length(combinations)
+
     dt = combinations(i).dt;
     duration = combinations(i).duration;
     n = combinations(i).n;
+    type = combinations(i).type;
 
     for j = 1:10
         % 원본 데이터 가져오기
@@ -98,6 +107,7 @@ for i = 1:length(combinations)
         AS2_1per_new(index).V = V_new;
         AS2_1per_new(index).I = I_new;
         AS2_1per_new(index).t = t_new;
+        AS2_1per_new(index).type = type;
         index = index + 1;
     end
 end
