@@ -2,9 +2,9 @@ clear; clc; close all;
 
 %% Load the data
 data_dir = 'G:\공유 드라이브\Battery Software Lab\Projects\DRT\SD';
-data_file = fullfile(data_dir, 'AS2_2per.mat');
+data_file = fullfile(data_dir, 'AS2_1per.mat');
 loaded_struct = load(data_file);
-data = loaded_struct.AS2_2per; % 파일이 바뀌면 바꿔야함
+data = loaded_struct.AS2_1per; % 파일이 바뀌면 바꿔야함
 
 %% 미리 할당할 총 조합 수 계산
 num_combinations = 0;
@@ -61,7 +61,7 @@ end
 
 % 결과를 저장할 struct 배열 초기화
 total_results = num_combinations * 10;
-result(total_results) = struct('dt', [], 'dur', [], 'N', [], 'V', [], 'I', [], 't', [], 'V_est', []);
+AS2_1per_new(total_results) = struct('dt', [], 'dur', [], 'N', [], 'V', [], 'I', [], 't', [], 'V_est', []);
 
 index = 1;
 
@@ -93,16 +93,16 @@ for i = 1:length(combinations)
         V_est_new = V_est_dur(1:step:end);
 
         % 결과 저장
-        result(index).dt = dt;
-        result(index).dur = duration;
-        result(index).N = N;
-        result(index).V = V_new;
-        result(index).I = I_new;
-        result(index).t = t_new;
-        result(index).V_est = V_est_new;
+        AS2_1per_new(index).dt = dt;
+        AS2_1per_new(index).dur = duration;
+        AS2_1per_new(index).N = N;
+        AS2_1per_new(index).V = V_new;
+        AS2_1per_new(index).I = I_new;
+        AS2_1per_new(index).t = t_new;
+        AS2_1per_new(index).V_est = V_est_new;
         index = index + 1;
     end
 end
 
 
-save('AS2_2per_new.mat', 'result'); % 파일마다 이름 바꾸기
+save('AS2_1per_new.mat', 'AS2_1per_new'); % 파일마다 이름 바꾸기
